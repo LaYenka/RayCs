@@ -1,0 +1,17 @@
+The MPI test test_mpi for CXX in mode normal failed to compile with the following output:
+Change Dir: /opt/dev/RayCs/build/CMakeFiles/CMakeScratch/TryCompile-R8Orsd
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_98f5a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_98f5a.dir/build.make CMakeFiles/cmTC_98f5a.dir/build
+gmake[1]: Entering directory '/opt/dev/RayCs/build/CMakeFiles/CMakeScratch/TryCompile-R8Orsd'
+Building CXX object CMakeFiles/cmTC_98f5a.dir/test_mpi.cpp.o
+/usr/bin/c++   -std=c++17 -o CMakeFiles/cmTC_98f5a.dir/test_mpi.cpp.o -c /opt/dev/RayCs/build/CMakeFiles/CMakeScratch/TryCompile-R8Orsd/test_mpi.cpp
+/opt/dev/RayCs/build/CMakeFiles/CMakeScratch/TryCompile-R8Orsd/test_mpi.cpp:1:10: fatal error: mpi.h: No such file or directory
+    1 | #include <mpi.h>
+      |          ^~~~~~~
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_98f5a.dir/build.make:78: CMakeFiles/cmTC_98f5a.dir/test_mpi.cpp.o] Error 1
+gmake[1]: Leaving directory '/opt/dev/RayCs/build/CMakeFiles/CMakeScratch/TryCompile-R8Orsd'
+gmake: *** [Makefile:127: cmTC_98f5a/fast] Error 2
+
+
+

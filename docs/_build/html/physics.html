@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Physics Background &#8212; RayCs 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=38b95dff" />
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Examples" href="examples.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Command-Line Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Physics Background</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#radar-cross-section">Radar Cross Section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coordinate-system">Coordinate System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#physical-optics-po">Physical Optics (PO)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#shooting-bouncing-rays-sbr">Shooting &amp; Bouncing Rays (SBR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bvh-acceleration">BVH Acceleration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#polarization">Polarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monostatic-vs-bistatic">Monostatic vs Bistatic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="physics-background">
+<h1>Physics Background<a class="headerlink" href="#physics-background" title="Link to this heading">¶</a></h1>
+<section id="radar-cross-section">
+<h2>Radar Cross Section<a class="headerlink" href="#radar-cross-section" title="Link to this heading">¶</a></h2>
+<p>Radar Cross Section (RCS) is a measure of how detectable an object is by radar.
+It is defined as the equivalent area that would produce the same scattered power
+as an isotropic scatterer:</p>
+<div class="math notranslate nohighlight">
+\[\sigma = \lim_{R\to\infty} 4\pi R^2 \frac{|\mathbf{E}_\text{scat}|^2}{|\mathbf{E}_\text{inc}|^2}\]</div>
+<p>RCS is typically expressed in dBsm (decibels relative to one square meter):</p>
+<div class="math notranslate nohighlight">
+\[\sigma_\text{dBsm} = 10 \log_{10}(\sigma)\]</div>
+</section>
+<section id="coordinate-system">
+<h2>Coordinate System<a class="headerlink" href="#coordinate-system" title="Link to this heading">¶</a></h2>
+<p>Observation angles are defined in the standard spherical coordinate system:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\theta\)</span> (theta): elevation angle from <span class="math notranslate nohighlight">\(+Z\)</span> axis (0<span class="math notranslate nohighlight">\(^\circ\)</span> to 180<span class="math notranslate nohighlight">\(^\circ\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi\)</span> (phi): azimuth angle around <span class="math notranslate nohighlight">\(Z\)</span> axis (0<span class="math notranslate nohighlight">\(^\circ\)</span> to 360<span class="math notranslate nohighlight">\(^\circ\)</span>)</p></li>
+</ul>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>    +Z (incident wave)
+    |
+    |
+    |    theta
+    |
+    |
+    O---------&gt; X
+   /
+  / phi
+ /
+Y
+</pre></div>
+</div>
+</section>
+<section id="physical-optics-po">
+<h2>Physical Optics (PO)<a class="headerlink" href="#physical-optics-po" title="Link to this heading">¶</a></h2>
+<p>Physical Optics approximates scattering from PEC targets using the
+tangent-plane approximation. The equivalent surface current is:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{J}_s = 2\; \hat{n} \times \mathbf{H}_\text{inc}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{n}\)</span> is the surface normal and <span class="math notranslate nohighlight">\(\mathbf{H}_\text{inc}\)</span>
+is the incident magnetic field. The scattered far-field is:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_\text{scat} = \frac{jk}{4\pi} \sum_{i=1}^{N} \mathbf{J}_{s,i} \, e^{jk\hat{r}\cdot\mathbf{r}'_i} \Delta A_i\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(k = 2\pi/\lambda\)</span> is the wavenumber</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{r}\)</span> is the observation direction</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{r}'_i\)</span> is the centroid of triangle <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta A_i\)</span> is the area of triangle <span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+<p>PO provides full angular coverage but ignores edge diffraction and multiple
+reflections.</p>
+</section>
+<section id="shooting-bouncing-rays-sbr">
+<h2>Shooting &amp; Bouncing Rays (SBR)<a class="headerlink" href="#shooting-bouncing-rays-sbr" title="Link to this heading">¶</a></h2>
+<p>SBR traces rays from a launch plane toward the target. Each ray represents a
+tube of the incident plane wave. The ray-object intersection is found using
+the BVH, and the scattered field is accumulated:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_\text{scat} = \sum_\text{rays} \mathbf{J}_s \, e^{jk(\hat{r} \cdot \mathbf{r}')} \Delta A\]</div>
+<p>SBR captures multiple reflections (ray bouncing) but only produces
+backscatter contributions. It is complementary to PO for complex targets.</p>
+</section>
+<section id="bvh-acceleration">
+<h2>BVH Acceleration<a class="headerlink" href="#bvh-acceleration" title="Link to this heading">¶</a></h2>
+<p>The Bounding Volume Hierarchy (BVH) accelerates ray-triangle intersection
+queries using SAH (Surface Area Heuristic) binning. Each BVH node stores an
+AABB; leaves contain up to 4 triangles. The Möller-Trumbore algorithm is used
+for per-triangle intersection.</p>
+</section>
+<section id="polarization">
+<h2>Polarization<a class="headerlink" href="#polarization" title="Link to this heading">¶</a></h2>
+<p>RCS is computed for two linear polarizations:</p>
+<ul class="simple">
+<li><p><strong>VV</strong>: Vertical transmit, vertical receive. The incident field is
+<span class="math notranslate nohighlight">\(\mathbf{E}_\text{inc} = \hat{\mathbf{e}}_\theta\)</span> and the scattered
+field is projected onto <span class="math notranslate nohighlight">\(\hat{\mathbf{e}}_\theta\)</span>.</p></li>
+<li><p><strong>HH</strong>: Horizontal transmit, horizontal receive. The scattered field is
+projected onto <span class="math notranslate nohighlight">\(\hat{\mathbf{e}}_\phi\)</span>.</p></li>
+</ul>
+</section>
+<section id="monostatic-vs-bistatic">
+<h2>Monostatic vs Bistatic<a class="headerlink" href="#monostatic-vs-bistatic" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Monostatic</strong> (default): The observation direction is the negative of
+the incident direction. The incident wave comes from <span class="math notranslate nohighlight">\(+Z\)</span> and the
+receiver is co-located with the transmitter.</p></li>
+<li><p><strong>Bistatic</strong>: The incident wave direction is fixed
+(<span class="math notranslate nohighlight">\(\theta_\text{inc}\)</span>, <span class="math notranslate nohighlight">\(\phi_\text{inc}\)</span>) and the scattered
+field is computed at all observation angles.</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &#169;2026, RayCs Team.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/physics.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

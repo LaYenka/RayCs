@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Command-Line Usage &#8212; RayCs 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=38b95dff" />
+    <script src="_static/documentation_options.js?v=8d563738"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API Reference" href="api.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command-Line Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#required-arguments">Required Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#output-format">Output Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mpi-parallelism">MPI Parallelism</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Physics Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="command-line-usage">
+<h1>Command-Line Usage<a class="headerlink" href="#command-line-usage" title="Link to this heading">¶</a></h1>
+<section id="synopsis">
+<h2>Synopsis<a class="headerlink" href="#synopsis" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>raycs<span class="w"> </span>--mesh<span class="w"> </span>&lt;file&gt;<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="required-arguments">
+<h2>Required Arguments<a class="headerlink" href="#required-arguments" title="Link to this heading">¶</a></h2>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-mesh">
+<span class="sig-name descname"><span class="pre">--mesh</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;file&gt;</span></span><a class="headerlink" href="#cmdoption-mesh" title="Link to this definition">¶</a></dt>
+<dd><p>Input mesh file path. Supports CGNS (<code class="docutils literal notranslate"><span class="pre">.cgns</span></code>, <code class="docutils literal notranslate"><span class="pre">.h5</span></code>) and Wavefront OBJ
+(<code class="docutils literal notranslate"><span class="pre">.obj</span></code>) formats. Auto-detected from extension.</p>
+</dd></dl>
+
+</section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading">¶</a></h2>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-freq">
+<span class="sig-name descname"><span class="pre">--freq</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;Hz&gt;</span></span><a class="headerlink" href="#cmdoption-freq" title="Link to this definition">¶</a></dt>
+<dd><p>Frequency in Hertz. Default: <code class="docutils literal notranslate"><span class="pre">10e9</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-method">
+<span class="sig-name descname"><span class="pre">--method</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;po|sbr|both&gt;</span></span><a class="headerlink" href="#cmdoption-method" title="Link to this definition">¶</a></dt>
+<dd><p>Scattering method:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">po</span></code> – Physical Optics (full angular coverage)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sbr</span></code> – Shooting &amp; Bouncing Rays (backscatter only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">both</span></code> – PO + SBR combined</p></li>
+</ul>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">sbr</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-bounces">
+<span class="sig-name descname"><span class="pre">--bounces</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;N&gt;</span></span><a class="headerlink" href="#cmdoption-bounces" title="Link to this definition">¶</a></dt>
+<dd><p>Maximum number of ray bounces for SBR. Default: <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-ray-density">
+<span class="sig-name descname"><span class="pre">--ray-density</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;N&gt;</span></span><a class="headerlink" href="#cmdoption-ray-density" title="Link to this definition">¶</a></dt>
+<dd><p>Rays per wavelength for SBR ray grid. Higher values increase resolution but
+reduce performance. Default: <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p>
+</dd></dl>
+
+<section id="observation-angles">
+<h3>Observation Angles<a class="headerlink" href="#observation-angles" title="Link to this heading">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-theta-min">
+<span class="sig-name descname"><span class="pre">--theta-min</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;deg&gt;</span></span><a class="headerlink" href="#cmdoption-theta-min" title="Link to this definition">¶</a></dt>
+<dd><p>Starting theta angle in degrees. Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-theta-max">
+<span class="sig-name descname"><span class="pre">--theta-max</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;deg&gt;</span></span><a class="headerlink" href="#cmdoption-theta-max" title="Link to this definition">¶</a></dt>
+<dd><p>Ending theta angle in degrees. Default: <code class="docutils literal notranslate"><span class="pre">180</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-theta-steps">
+<span class="sig-name descname"><span class="pre">--theta-steps</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;N&gt;</span></span><a class="headerlink" href="#cmdoption-theta-steps" title="Link to this definition">¶</a></dt>
+<dd><p>Number of theta steps. Default: <code class="docutils literal notranslate"><span class="pre">180</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-phi-min">
+<span class="sig-name descname"><span class="pre">--phi-min</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;deg&gt;</span></span><a class="headerlink" href="#cmdoption-phi-min" title="Link to this definition">¶</a></dt>
+<dd><p>Starting phi angle in degrees. Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-phi-max">
+<span class="sig-name descname"><span class="pre">--phi-max</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;deg&gt;</span></span><a class="headerlink" href="#cmdoption-phi-max" title="Link to this definition">¶</a></dt>
+<dd><p>Ending phi angle in degrees. Default: <code class="docutils literal notranslate"><span class="pre">360</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-phi-steps">
+<span class="sig-name descname"><span class="pre">--phi-steps</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;N&gt;</span></span><a class="headerlink" href="#cmdoption-phi-steps" title="Link to this definition">¶</a></dt>
+<dd><p>Number of phi steps. Default: <code class="docutils literal notranslate"><span class="pre">360</span></code>.</p>
+</dd></dl>
+
+</section>
+<section id="scattering-mode">
+<h3>Scattering Mode<a class="headerlink" href="#scattering-mode" title="Link to this heading">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-bistatic">
+<span class="sig-name descname"><span class="pre">--bistatic</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-bistatic" title="Link to this definition">¶</a></dt>
+<dd><p>Enable bistatic mode. In bistatic mode the incident wave direction is
+fixed and the scattered field is computed at all observation angles.
+By default monostatic mode is used (incident direction = <span class="math notranslate nohighlight">\(-\)</span> observation direction).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-inc-theta">
+<span class="sig-name descname"><span class="pre">--inc-theta</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;deg&gt;</span></span><a class="headerlink" href="#cmdoption-inc-theta" title="Link to this definition">¶</a></dt>
+<dd><p>Incident direction theta for bistatic mode. Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-inc-phi">
+<span class="sig-name descname"><span class="pre">--inc-phi</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;deg&gt;</span></span><a class="headerlink" href="#cmdoption-inc-phi" title="Link to this definition">¶</a></dt>
+<dd><p>Incident direction phi for bistatic mode. Default: <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+</dd></dl>
+
+</section>
+<section id="output">
+<h3>Output<a class="headerlink" href="#output" title="Link to this heading">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-output">
+<span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;file&gt;</span></span><a class="headerlink" href="#cmdoption-output" title="Link to this definition">¶</a></dt>
+<dd><p>Output CSV file path. Default: <code class="docutils literal notranslate"><span class="pre">rcs.csv</span></code>.</p>
+</dd></dl>
+
+</section>
+<section id="other">
+<h3>Other<a class="headerlink" href="#other" title="Link to this heading">¶</a></h3>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-help">
+<span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-help" title="Link to this definition">¶</a></dt>
+<dd><p>Print usage information and exit.</p>
+</dd></dl>
+
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Monostatic PO with default parameters</span>
+raycs<span class="w"> </span>--mesh<span class="w"> </span>target.obj<span class="w"> </span>--freq<span class="w"> </span>3e9<span class="w"> </span>--method<span class="w"> </span>po
+
+<span class="c1"># Monostatic SBR with custom angles</span>
+raycs<span class="w"> </span>--mesh<span class="w"> </span>target.obj<span class="w"> </span>--freq<span class="w"> </span>10e9<span class="w"> </span>--method<span class="w"> </span>sbr<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--theta-steps<span class="w"> </span><span class="m">90</span><span class="w"> </span>--phi-steps<span class="w"> </span><span class="m">180</span>
+
+<span class="c1"># Bistatic PO with fixed incident direction</span>
+raycs<span class="w"> </span>--mesh<span class="w"> </span>target.obj<span class="w"> </span>--freq<span class="w"> </span>3e9<span class="w"> </span>--method<span class="w"> </span>po<span class="w"> </span>--bistatic<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--inc-theta<span class="w"> </span><span class="m">45</span><span class="w"> </span>--inc-phi<span class="w"> </span><span class="m">0</span>
+
+<span class="c1"># Both methods combined</span>
+raycs<span class="w"> </span>--mesh<span class="w"> </span>target.obj<span class="w"> </span>--freq<span class="w"> </span>3e9<span class="w"> </span>--method<span class="w"> </span>both
+
+<span class="c1"># High-resolution with custom output</span>
+raycs<span class="w"> </span>--mesh<span class="w"> </span>target.obj<span class="w"> </span>--freq<span class="w"> </span>10e9<span class="w"> </span>--method<span class="w"> </span>po<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--theta-steps<span class="w"> </span><span class="m">360</span><span class="w"> </span>--phi-steps<span class="w"> </span><span class="m">360</span><span class="w"> </span>--output<span class="w"> </span>results.csv
+</pre></div>
+</div>
+</section>
+<section id="output-format">
+<h2>Output Format<a class="headerlink" href="#output-format" title="Link to this heading">¶</a></h2>
+<p>The CSV output has the following columns:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>theta_deg, phi_deg, RCS_total_dBsm, RCS_VV_dBsm, RCS_HH_dBsm
+</pre></div>
+</div>
+<p>Each row corresponds to one observation angle pair <span class="math notranslate nohighlight">\((\theta, \phi)\)</span>.
+RCS values are in dBsm (decibels relative to one square meter).</p>
+<p>Polarization conventions:</p>
+<ul class="simple">
+<li><p><strong>VV</strong>: Vertical transmit, vertical receive (<span class="math notranslate nohighlight">\(E_\theta\)</span>)</p></li>
+<li><p><strong>HH</strong>: Horizontal transmit, horizontal receive (<span class="math notranslate nohighlight">\(E_\phi\)</span>)</p></li>
+<li><p><strong>Total</strong>: <span class="math notranslate nohighlight">\(\sigma_\text{total} = \sigma_\text{VV} + \sigma_\text{HH}\)</span></p></li>
+</ul>
+</section>
+<section id="mpi-parallelism">
+<h2>MPI Parallelism<a class="headerlink" href="#mpi-parallelism" title="Link to this heading">¶</a></h2>
+<p>When compiled with MPI support, observation angles are distributed across
+ranks. Run with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun<span class="w"> </span>-np<span class="w"> </span><span class="m">4</span><span class="w"> </span>raycs<span class="w"> </span>--mesh<span class="w"> </span>target.obj<span class="w"> </span>--freq<span class="w"> </span>3e9<span class="w"> </span>--method<span class="w"> </span>sbr
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &#169;2026, RayCs Team.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/usage.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

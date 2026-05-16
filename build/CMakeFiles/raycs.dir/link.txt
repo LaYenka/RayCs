@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/raycs.dir/src/main.cpp.o CMakeFiles/raycs.dir/src/cgns_mesh.cpp.o CMakeFiles/raycs.dir/src/bvh.cpp.o CMakeFiles/raycs.dir/src/po.cpp.o CMakeFiles/raycs.dir/src/sbr.cpp.o CMakeFiles/raycs.dir/src/rcs.cpp.o -o raycs  /usr/lib/x86_64-linux-gnu/libcgns.so /usr/lib/gcc/x86_64-linux-gnu/12/libgomp.so /usr/lib/x86_64-linux-gnu/libpthread.a 

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["scikit-build-core>=0.5.0"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "raycs"
+version = "0.1.0"
+description = "Computational electromagnetics for Radar Cross Section (RCS)"
+authors = [{name = "RayCs Team"}]
+requires-python = ">=3.8"
+dependencies = [
+    "numpy",
+    "matplotlib",
+]
+
+[tool.scikit-build]
+wheel.packages = ["src/raycs"]
+cmake.source-dir = ".."
+cmake.args = ["-DBUILD_PYTHON=ON"]

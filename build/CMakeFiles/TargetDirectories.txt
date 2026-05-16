@@ -1,0 +1,3 @@
+/opt/dev/RayCs/build/CMakeFiles/raycs.dir
+/opt/dev/RayCs/build/CMakeFiles/edit_cache.dir
+/opt/dev/RayCs/build/CMakeFiles/rebuild_cache.dir
